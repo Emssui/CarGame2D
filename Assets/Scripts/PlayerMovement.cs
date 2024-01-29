@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
   [SerializeField] private float shipAcceleration = 10f;
   [SerializeField] private float shipMaxVelocity = 30f;
   [SerializeField] private float shipRotationSpeed = 180f;
-  [SerializeField] public float runningSpeed = 100f;
+  [SerializeField] private float runningSpeed = 20f;
 
   [Header("Object references")]
 
@@ -73,10 +74,16 @@ public class PlayerMovement : MonoBehaviour {
   private void OnTriggerEnter2D(Collider2D collision) {
     if (collision.CompareTag("FinishLine") && checkChecked) {
         Laps++;
+        shipAcceleration = 10f;
+        runningSpeed = 20f;
         Debug.Log("Player1 Laps: " + Laps);
         checkChecked = false;
     } else if(collision.CompareTag("Checkpoint")) {
         checkChecked = true;
+    } else if(collision.CompareTag("Oil")) {
+      shipAcceleration = 2f;
+      runningSpeed = 10f;
+      collision.gameObject.SetActive(false);
     }
   }
 }
