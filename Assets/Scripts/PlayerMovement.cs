@@ -75,14 +75,14 @@ public class PlayerMovement : MonoBehaviour {
     if (collision.CompareTag("FinishLine") && checkChecked) {
         Laps++;
         shipAcceleration = 10f;
-        runningSpeed = 20f;
+        runningSpeed = 15f;
         Debug.Log("Player1 Laps: " + Laps);
         checkChecked = false;
     } else if(collision.CompareTag("Checkpoint")) {
         checkChecked = true;
     } else if(collision.CompareTag("Oil")) {
       shipAcceleration = 2f;
-      runningSpeed = 10f;
+      runningSpeed = 6f;
       collision.gameObject.SetActive(false);
     }
   }
